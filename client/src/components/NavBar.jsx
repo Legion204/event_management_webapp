@@ -27,9 +27,9 @@ const NavBar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 space-x-8 text-lg">
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to="/event">Events</Link></li>
+                    <li><Link to="/events">Events</Link></li>
                     <li><Link to="/add-event">Add Event</Link></li>
-                    <li><Link to="/my-event">My Event</Link></li>
+                    <li><Link to="/my-events">My Event</Link></li>
                 </ul>
             </div>
             <div className="navbar-end">
