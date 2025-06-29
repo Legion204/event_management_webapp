@@ -4,6 +4,8 @@ import NavBar from "./components/NavBar";
 import Events from "./pages/Events";
 import AddEvents from "./pages/AddEvents";
 import MyEvents from "./pages/MyEvents";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/events" element={<Events/>} />
         <Route path="/add-event" element={<AddEvents />} />
         <Route path="/my-events" element={<MyEvents />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

@@ -1,7 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
 
 const NavBar = () => {
+    const { user, logout } = useAuth();
+    console.log(user);
+    const [dropdown, setDropdown] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        // navigate("/login");
+    };
     return (
         <div className="navbar bg-black shadow-sm text-white">
             <div className="navbar-start">
@@ -33,7 +43,34 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                {!user ? (
+                    <Link
+                        to="/register"
+                        className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
+                    >
+                        Sign In
+                    </Link>
+                ) : (
+                    <div className="relative">
+                        <img
+                            onClick={() => setDropdown(!dropdown)}
+                            src={user?.photoURL}
+                            alt="profile"
+                            className="w-10 h-10 rounded-full cursor-pointer"
+                        />
+                        {dropdown && (
+                            <div className="absolute right-0 mt-2 bg-white text-black p-2 rounded shadow">
+                                <p className="font-bold">{user?.name}</p>
+                                <button
+                                    onClick={handleLogout}
+                                    className="text-red-600 hover:underline"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );
