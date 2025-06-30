@@ -5,12 +5,11 @@ import { useAuth } from "../context/AuthContext";
 const NavBar = () => {
     const { user, logout } = useAuth();
     console.log(user);
-    const [dropdown, setDropdown] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => {
         logout();
-        // navigate("/login");
+        navigate("/");
     };
     return (
         <div className="navbar bg-black shadow-sm text-white">
@@ -51,28 +50,27 @@ const NavBar = () => {
                         Sign In
                     </Link>
                 ) : (
-                    <div className="relative">
-                        <img
-                            onClick={() => setDropdown(!dropdown)}
-                            src={user?.photoURL}
-                            alt="profile"
-                            className="w-10 h-10 rounded-full cursor-pointer"
-                        />
-                        {dropdown && (
-                            <div className="absolute right-0 mt-2 bg-white text-black p-2 rounded shadow">
-                                <p className="font-bold">{user?.name}</p>
-                                <button
-                                    onClick={handleLogout}
-                                    className="text-red-600 hover:underline"
-                                >
-                                    Logout
-                                </button>
+                    <div className="dropdown dropdown-end">
+                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img
+                                    alt="user profile image"
+                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                             </div>
-                        )}
+                        </div>
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            <li>
+                                <a className="text-black">{user?.name}</a>
+                            </li>
+                            <li><button onClick={handleLogout} className='text-black btn-accent' >Logout</button></li>
+                        </ul>
                     </div>
+
                 )}
             </div>
-        </div>
+        </div >
     );
 };
 

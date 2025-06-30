@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
@@ -72,6 +72,7 @@ const Register = () => {
                 >
                     Register
                 </button>
+                <p className='mt-3'>Have an account? <Link className='link link-primary' to={'/login'}>Login</Link></p>
             </form>
         </div>
     );
