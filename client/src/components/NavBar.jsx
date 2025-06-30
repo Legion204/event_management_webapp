@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, NavLink } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
+import logo from '../assets/logosm.png';
 
 const NavBar = () => {
     const { user, logout } = useAuth();
@@ -64,7 +65,7 @@ const NavBar = () => {
                 </div>
                 <Link to="/" className="text-xl font-bold">
                     <img className='w-52'
-                        src="/src/assets/logosm.png"
+                        src={logo}
                         alt="logo" />
                 </Link>
             </div>

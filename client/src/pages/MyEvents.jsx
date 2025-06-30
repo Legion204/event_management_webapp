@@ -11,13 +11,27 @@ const MyEvents = () => {
     const [events, setEvents] = useState([]);
     const [editingEvent, setEditingEvent] = useState(null);
     const [confirmId, setConfirmId] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios
-            .get(`${import.meta.env.VITE_SERVER_URI}/api/events/my?email=${user.email}`, {
-                headers: { Authorization: token },
-            })
-            .then((res) => setEvents(res.data));
+        const fetchMyEvents = async () => {
+            try {
+                setLoading(true); // start loading
+                const res = await axios.get(
+                    `${import.meta.env.VITE_SERVER_URI}/api/events/my?email=${user.email}`,
+                    {
+                        headers: { Authorization: token },
+                    }
+                );
+                setEvents(res.data);
+            } catch (err) {
+                console.error("Error fetching your events", err);
+            } finally {
+                setLoading(false); // stop loading
+            }
+        };
+
+        if (user?.email && token) fetchMyEvents();
     }, [user.email, token]);
 
     const handleDelete = async (id) => {
@@ -47,31 +61,40 @@ const MyEvents = () => {
                 My Events
             </h2>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {events.map((event) => (
-                    <div key={event._id} className="bg-[#312D27] p-5 rounded shadow text-white">
-                        <h3 className="text-xl font-bold mb-2 text-[#D85529]">{event.title}</h3>
-                        <p className="text-sm flex items-center"> <CiCalendar />{event.date} <IoTimeOutline />{event.time}</p>
-                        <p className="text-sm flex items-center"><IoLocationOutline />  {event.location}</p>
-                        <p className="text-sm flex items-center"> <GoPersonAdd/> {event.attendeeCount} attendees</p>
-                        <p className="text-sm mb-2"> {event.description}</p>
-                        <div className="flex gap-2 mt-4">
-                            <button
-                                onClick={() => handleEdit(event)}
-                                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                            >
-                                Update
-                            </button>
-                            <button
-                                onClick={() => handleDelete(event._id)}
-                                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                            >
-                                Delete
-                            </button>
+            {!loading ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {events.map((event) => (
+                        <div key={event._id} className="bg-[#312D27] p-5 rounded shadow text-white">
+                            <h3 className="text-xl font-bold mb-2 text-[#D85529]">{event.title}</h3>
+                            <p className="text-sm flex items-center"> <CiCalendar />{event.date} <IoTimeOutline />{event.time}</p>
+                            <p className="text-sm flex items-center"><IoLocationOutline />  {event.location}</p>
+                            <p className="text-sm flex items-center"> <GoPersonAdd /> {event.attendeeCount} attendees</p>
+                            <p className="text-sm mb-2"> {event.description}</p>
+                            <div className="flex gap-2 mt-4">
+                                <button
+                                    onClick={() => handleEdit(event)}
+                                    className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                                >
+                                    Update
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(event._id)}
+                                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="flex justify-center items-center min-h-[60vh]">
+                    <div className="flex flex-col items-center">
+                        <span className="inline-block w-10 h-10 border-4 border-[#D85529] border-t-transparent rounded-full animate-spin"></span>
+                        <p className="mt-3 text-gray-600">Loading My Events...</p>
                     </div>
-                ))}
-            </div>
+                </div>
+            )}
 
             {/* Update Modal */}
             {editingEvent && (

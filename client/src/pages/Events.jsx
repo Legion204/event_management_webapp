@@ -9,6 +9,7 @@ const Events = () => {
     const { user, token } = useAuth();
     const [events, setEvents] = useState([]);
     const [joinedEvents, setJoinedEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // 🆕 Search and Filter state
     const [search, setSearch] = useState("");
@@ -18,6 +19,7 @@ const Events = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
+                setLoading(true); // start loading
                 const res = await axios.get(`${import.meta.env.VITE_SERVER_URI}/api/events`, {
                     headers: { Authorization: token },
                     params: { search, filter },
@@ -42,12 +44,13 @@ const Events = () => {
             } catch (err) {
                 console.error("Failed to fetch events:", err);
             }
+            setLoading(false); // stop loading
         };
 
         if (token) fetchEvents();
     }, [search, filter, token]);
 
-    // 🖱 Join event handler
+    //  Join event handler
     const handleJoin = async (id) => {
         if (joinedEvents.includes(id)) return;
 
@@ -111,28 +114,37 @@ const Events = () => {
                     Clear Filters
                 </button>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {events.map((event) => (
-                    <div key={event._id} className="bg-[#312D27] p-5 rounded shadow">
-                        <h3 className="text-xl font-bold mb-2 text-[#D85529]">{event.title}</h3>
-                        <p className="text-sm mb-1 flex items-center"><CiCalendar /> {event.date} <IoTimeOutline />{event.time}</p>
-                        <p className="text-sm mb-1 flex items-center"><IoLocationOutline /> {event.location}</p>
-                        <p className="text-sm mb-2 flex items-center"><IoPersonOutline />Posted by: {event.name}</p>
-                        <p className="mb-2">{event.description}</p>
-                        <p className="mb-3 font-semibold flex items-center"><GoPersonAdd /> Attendees: {event.attendeeCount}</p>
-                        <button
-                            onClick={() => handleJoin(event._id)}
-                            disabled={joinedEvents.includes(event._id)}
-                            className={`w-full py-2 rounded text-white ${joinedEvents.includes(event._id)
-                                ? "bg-gray-400 cursor-not-allowed"
-                                : "bg-[#D85529] hover:bg-[#74120D]"
-                                }`}
-                        >
-                            {joinedEvents.includes(event._id) ? "Joined" : "Join Event"}
-                        </button>
+            {!loading ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {events.map((event) => (
+                        <div key={event._id} className="bg-[#312D27] p-5 rounded shadow">
+                            <h3 className="text-xl font-bold mb-2 text-[#D85529]">{event.title}</h3>
+                            <p className="text-sm mb-1 flex items-center"><CiCalendar /> {event.date} <IoTimeOutline />{event.time}</p>
+                            <p className="text-sm mb-1 flex items-center"><IoLocationOutline /> {event.location}</p>
+                            <p className="text-sm mb-2 flex items-center"><IoPersonOutline />Posted by: {event.name}</p>
+                            <p className="mb-2">{event.description}</p>
+                            <p className="mb-3 font-semibold flex items-center"><GoPersonAdd /> Attendees: {event.attendeeCount}</p>
+                            <button
+                                onClick={() => handleJoin(event._id)}
+                                disabled={joinedEvents.includes(event._id)}
+                                className={`w-full py-2 rounded text-white ${joinedEvents.includes(event._id)
+                                    ? "bg-gray-400 cursor-not-allowed"
+                                    : "bg-[#D85529] hover:bg-[#74120D]"
+                                    }`}
+                            >
+                                {joinedEvents.includes(event._id) ? "Joined" : "Join Event"}
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="flex justify-center items-center min-h-[60vh]">
+                    <div className="flex flex-col items-center">
+                        <span className="inline-block w-10 h-10 border-4 border-[#D85529] border-t-transparent rounded-full animate-spin"></span>
+                        <p className="mt-3 text-gray-600">Loading events...</p>
                     </div>
-                ))}
-            </div>
+                </div>
+            )}
         </div>
     );
 };
