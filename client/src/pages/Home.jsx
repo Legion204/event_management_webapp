@@ -4,7 +4,7 @@ import { CiCirclePlus } from "react-icons/ci";
 
 const Home = () => {
     return (
-        <div className="bg-[#191510] p-8 shadow-lg text-center h-dvh">
+        <div className="bg-[#191510] p-8 shadow-lg text-center lg:h-dvh md:h-dvh sm:h-full">
             <h1 className="text-4xl font-bold text-[#F7F7F5] mb-4">Welcome to Event Manager!</h1>
             <p className="text-lg text-[#F7F7F5]">Your ultimate platform for discovering, managing, and joining exciting events.</p>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
