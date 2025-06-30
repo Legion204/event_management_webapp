@@ -2,6 +2,9 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { CiCalendar } from "react-icons/ci";
+import { IoLocationOutline, IoPersonOutline, IoTimeOutline } from "react-icons/io5";
+import { GoPersonAdd } from "react-icons/go";
 
 const MyEvents = () => {
     const { user, token } = useAuth();
@@ -39,19 +42,19 @@ const MyEvents = () => {
         );
     };
     return (
-        <div className="p-6 bg-gray-100 min-h-screen">
-            <h2 className="text-3xl font-bold mb-6 text-center text-purple-700">
+        <div className="p-6 bg-[#191510] min-h-screen">
+            <h2 className="text-3xl font-bold mb-6 text-center text-[#D85529]">
                 My Events
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {events.map((event) => (
-                    <div key={event._id} className="bg-white p-5 rounded shadow">
-                        <h3 className="text-xl font-bold mb-2 text-purple-600">{event.title}</h3>
-                        <p className="text-sm">📅 {event.date} @ {event.time}</p>
-                        <p className="text-sm">📍 {event.location}</p>
-                        <p className="text-sm">🙋 {event.attendeeCount} attendees</p>
-                        <p className="text-sm mb-2">📝 {event.description}</p>
+                    <div key={event._id} className="bg-[#312D27] p-5 rounded shadow text-white">
+                        <h3 className="text-xl font-bold mb-2 text-[#D85529]">{event.title}</h3>
+                        <p className="text-sm flex items-center"> <CiCalendar />{event.date} <IoTimeOutline />{event.time}</p>
+                        <p className="text-sm flex items-center"><IoLocationOutline />  {event.location}</p>
+                        <p className="text-sm flex items-center"> <GoPersonAdd/> {event.attendeeCount} attendees</p>
+                        <p className="text-sm mb-2"> {event.description}</p>
                         <div className="flex gap-2 mt-4">
                             <button
                                 onClick={() => handleEdit(event)}

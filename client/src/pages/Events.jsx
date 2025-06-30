@@ -23,14 +23,22 @@ const Events = () => {
                     params: { search, filter },
                 });
 
-                // Sort newest first
+                // sort the recent event first
+                const now = new Date();
+
                 const sorted = [...res.data].sort((a, b) => {
-                    const d1 = new Date(`${a.date}T${a.time}`);
-                    const d2 = new Date(`${b.date}T${b.time}`);
-                    return d2 - d1;
+                    const aTime = new Date(`${a.date.trim()}T${a.time.trim()}`);
+                    const bTime = new Date(`${b.date.trim()}T${b.time.trim()}`);
+
+                    const diffA = Math.abs(aTime - now);
+                    const diffB = Math.abs(bTime - now);
+
+                    return diffA - diffB;
                 });
 
                 setEvents(sorted);
+
+
             } catch (err) {
                 console.error("Failed to fetch events:", err);
             }
@@ -111,7 +119,7 @@ const Events = () => {
                         <p className="text-sm mb-1 flex items-center"><IoLocationOutline /> {event.location}</p>
                         <p className="text-sm mb-2 flex items-center"><IoPersonOutline />Posted by: {event.name}</p>
                         <p className="mb-2">{event.description}</p>
-                        <p className="mb-3 font-semibold flex items-center"><GoPersonAdd/> Attendees: {event.attendeeCount}</p>
+                        <p className="mb-3 font-semibold flex items-center"><GoPersonAdd /> Attendees: {event.attendeeCount}</p>
                         <button
                             onClick={() => handleJoin(event._id)}
                             disabled={joinedEvents.includes(event._id)}
