@@ -63,8 +63,8 @@ const Events = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-100 min-h-screen">
-            <h2 className="text-3xl font-bold mb-6 text-center text-purple-700">All Events</h2>
+        <div className="p-6 bg-[#191510] min-h-screen text-white">
+            <h2 className="text-3xl font-bold mb-6 text-center text-[#D85529]">All Events</h2>
             <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
                 {/* 🔍 Search input */}
                 <input
@@ -72,38 +72,38 @@ const Events = () => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search events by title"
-                    className="w-full md:w-1/2 p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="w-full md:w-1/2 p-3 border border-[#D85529] rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-[#D85529]"
                 />
 
-                {/* 📅 Filter dropdown */}
+                {/* Filter dropdown */}
                 <select
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
-                    className="w-full md:w-1/3 p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="w-full md:w-1/3 p-3 border border-[#D85529] rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-[#D85529] bg-[#191510]"
                 >
-                    <option value="all">📆 All Dates</option>
-                    <option value="today">📅 Today</option>
-                    <option value="this-week">🗓️ This Week</option>
-                    <option value="last-week">🕘 Last Week</option>
-                    <option value="this-month">📈 This Month</option>
-                    <option value="last-month">📉 Last Month</option>
+                    <option value="all"> All Dates</option>
+                    <option value="today"> Today</option>
+                    <option value="this-week"> This Week</option>
+                    <option value="last-week"> Last Week</option>
+                    <option value="this-month"> This Month</option>
+                    <option value="last-month"> Last Month</option>
                 </select>
 
-                {/* 🧼 Clear Filters Button */}
+                {/* Clear Filters Button */}
                 <button
                     onClick={() => {
                         setSearch("");
                         setFilter("all");
                     }}
-                    className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300 text-sm"
+                    className="bg-[#D85529] px-4 py-2 rounded hover:bg-[#74120D] text-sm"
                 >
                     Clear Filters
                 </button>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {events.map((event) => (
-                    <div key={event._id} className="bg-white p-5 rounded shadow">
-                        <h3 className="text-xl font-bold mb-2 text-purple-600">{event.title}</h3>
+                    <div key={event._id} className="bg-[#312D27] p-5 rounded shadow">
+                        <h3 className="text-xl font-bold mb-2 text-[#D85529]">{event.title}</h3>
                         <p className="text-sm mb-1">📅 {event.date} @ {event.time}</p>
                         <p className="text-sm mb-1">📍 {event.location}</p>
                         <p className="text-sm mb-2">👤 Posted by: {event.name}</p>
@@ -114,7 +114,7 @@ const Events = () => {
                             disabled={joinedEvents.includes(event._id)}
                             className={`w-full py-2 rounded text-white ${joinedEvents.includes(event._id)
                                 ? "bg-gray-400 cursor-not-allowed"
-                                : "bg-purple-600 hover:bg-purple-700"
+                                : "bg-[#D85529] hover:bg-[#74120D]"
                                 }`}
                         >
                             {joinedEvents.includes(event._id) ? "Joined" : "Join Event"}
