@@ -4,8 +4,9 @@ import { useAuth } from "../context/AuthContext";
 
 const NavBar = () => {
     const { user, logout } = useAuth();
-    console.log(user);
     const navigate = useNavigate();
+    const [search, setSearch] = useState("");
+    const [filter, setFilter] = useState("all");
 
     const handleLogout = () => {
         logout();

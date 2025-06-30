@@ -30,6 +30,7 @@ const AddEvents = () => {
             const payload = {
                 ...form,
                 name: user.name,
+                email:user.email
             };
             const res = await axios.post("http://localhost:5000/api/events", payload, {
                 headers: { Authorization: token },
