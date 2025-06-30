@@ -26,12 +26,12 @@ const Login = () => {
         }
     };
     return (
-        <div className="flex justify-center items-center min-h-[calc(100vh-64px)] bg-gray-100 px-4">
+        <div className="flex justify-center items-center min-h-[calc(100vh-64px)] bg-[#191510] px-4 text-white">
             <form
                 onSubmit={handleSubmit}
-                className="bg-white p-8 rounded shadow-md w-full max-w-md"
+                className="bg-[#312D27] p-8 rounded shadow-md w-full max-w-md"
             >
-                <h2 className="text-2xl font-bold mb-6 text-center text-purple-700">Login</h2>
+                <h2 className="text-2xl font-bold mb-6 text-center text-[#D85529]">Login</h2>
                 {error && <p className="text-red-600 mb-4">{error}</p>}
                 <input
                     type="email"
@@ -51,7 +51,7 @@ const Login = () => {
                 />
                 <button
                     type="submit"
-                    className="w-full bg-purple-600 text-white py-3 rounded hover:bg-purple-700"
+                    className="w-full bg-[#D85529] text-white py-3 rounded hover:bg-[#71120C]"
                 >
                     Login
                 </button>

@@ -28,12 +28,12 @@ const Register = () => {
         }
     };
     return (
-        <div className="flex justify-center items-center min-h-[calc(100vh-64px)] bg-gray-100 px-4">
+        <div className="flex justify-center items-center min-h-[calc(100vh-64px)] bg-[#191510] text-white px-4">
             <form
                 onSubmit={handleSubmit}
-                className="bg-white p-8 rounded shadow-md w-full max-w-md"
+                className="bg-[#312D27] p-8 rounded shadow-md w-full max-w-md"
             >
-                <h2 className="text-2xl font-bold mb-6 text-center text-purple-700">Register</h2>
+                <h2 className="text-2xl font-bold mb-6 text-center text-[#D85529]">Register</h2>
                 {error && <p className="text-red-600 mb-4">{error}</p>}
                 <input
                     type="text"
@@ -68,7 +68,7 @@ const Register = () => {
                 />
                 <button
                     type="submit"
-                    className="w-full bg-purple-600 text-white py-3 rounded hover:bg-purple-700"
+                    className="w-full bg-[#D85529] text-white py-3 rounded hover:bg-[#71120C]"
                 >
                     Register
                 </button>
