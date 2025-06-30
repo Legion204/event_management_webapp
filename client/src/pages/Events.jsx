@@ -15,7 +15,7 @@ const Events = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/events", {
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_URI}/api/events`, {
                     headers: { Authorization: token },
                     params: { search, filter },
                 });
@@ -41,7 +41,7 @@ const Events = () => {
         if (joinedEvents.includes(id)) return;
 
         try {
-            await axios.patch(`http://localhost:5000/api/events/${id}/join`, {}, {
+            await axios.patch(`${import.meta.env.VITE_SERVER_URI}/api/events/${id}/join`, {}, {
                 headers: {
                     Authorization: token,
                     email: user.email,

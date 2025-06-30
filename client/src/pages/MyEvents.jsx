@@ -11,7 +11,7 @@ const MyEvents = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/api/events/my?email=${user.email}`, {
+            .get(`${import.meta.env.VITE_SERVER_URI}/api/events/my?email=${user.email}`, {
                 headers: { Authorization: token },
             })
             .then((res) => setEvents(res.data));
@@ -21,7 +21,7 @@ const MyEvents = () => {
         const confirmed = confirm("Are you sure you want to delete?");
         if (!confirmed) return;
 
-        await axios.delete(`http://localhost:5000/api/events/${id}`);
+        await axios.delete(`${import.meta.env.VITE_SERVER_URI}/api/events/${id}`);
         setEvents(events.filter((e) => e._id !== id));
     };
 
@@ -32,7 +32,7 @@ const MyEvents = () => {
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
         const { _id, ...updateData } = editingEvent;
-        await axios.put(`http://localhost:5000/api/events/${_id}`, updateData);
+        await axios.put(`${import.meta.env.VITE_SERVER_URI}/api/events/${_id}`, updateData);
         setEditingEvent(null);
         setEvents((prev) =>
             prev.map((e) => (e._id === _id ? { ...e, ...updateData } : e))

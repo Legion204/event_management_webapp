@@ -30,9 +30,9 @@ const AddEvents = () => {
             const payload = {
                 ...form,
                 name: user.name,
-                email:user.email
+                email: user.email
             };
-            const res = await axios.post("http://localhost:5000/api/events", payload, {
+            const res = await axios.post(`${import.meta.env.VITE_SERVER_URI}/api/events`, payload, {
                 headers: { Authorization: token },
             });
             setSuccess("Event created successfully!");
