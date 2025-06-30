@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import { CiCalendar } from "react-icons/ci";
+import { IoLocationOutline, IoPersonOutline, IoTimeOutline } from "react-icons/io5";
+import { GoPersonAdd } from "react-icons/go";
 
 const Events = () => {
     const { user, token } = useAuth();
@@ -104,11 +107,11 @@ const Events = () => {
                 {events.map((event) => (
                     <div key={event._id} className="bg-[#312D27] p-5 rounded shadow">
                         <h3 className="text-xl font-bold mb-2 text-[#D85529]">{event.title}</h3>
-                        <p className="text-sm mb-1">📅 {event.date} @ {event.time}</p>
-                        <p className="text-sm mb-1">📍 {event.location}</p>
-                        <p className="text-sm mb-2">👤 Posted by: {event.name}</p>
+                        <p className="text-sm mb-1 flex items-center"><CiCalendar /> {event.date} <IoTimeOutline />{event.time}</p>
+                        <p className="text-sm mb-1 flex items-center"><IoLocationOutline /> {event.location}</p>
+                        <p className="text-sm mb-2 flex items-center"><IoPersonOutline />Posted by: {event.name}</p>
                         <p className="mb-2">{event.description}</p>
-                        <p className="mb-3 font-semibold">🙋 Attendees: {event.attendeeCount}</p>
+                        <p className="mb-3 font-semibold flex items-center"><GoPersonAdd/> Attendees: {event.attendeeCount}</p>
                         <button
                             onClick={() => handleJoin(event._id)}
                             disabled={joinedEvents.includes(event._id)}

@@ -43,12 +43,12 @@ const AddEvents = () => {
         }
     };
     return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+        <div className="min-h-screen bg-[#191510] flex items-center justify-center px-4 text-white">
             <form
                 onSubmit={handleSubmit}
-                className="bg-white p-8 rounded shadow w-full max-w-xl"
+                className="bg-[#312D27] p-8 rounded shadow w-full max-w-xl"
             >
-                <h2 className="text-2xl font-bold mb-6 text-purple-700 text-center">
+                <h2 className="text-2xl font-bold mb-6 text-[#D85529] text-center">
                     Add New Event
                 </h2>
                 {error && <p className="text-red-600 mb-4">{error}</p>}
@@ -60,7 +60,7 @@ const AddEvents = () => {
                         onChange={handleChange}
                         placeholder="Event Title"
                         required
-                        className="p-3 border rounded"
+                        className="p-3 border rounded border-[#D85529] focus:ring-[#D85529]"
                     />
                     <input
                         type="date"
@@ -68,7 +68,7 @@ const AddEvents = () => {
                         value={form.date}
                         onChange={handleChange}
                         required
-                        className="p-3 border rounded"
+                        className="p-3 border rounded border-[#D85529] focus:ring-[#D85529]"
                     />
                     <input
                         type="time"
@@ -76,7 +76,7 @@ const AddEvents = () => {
                         value={form.time}
                         onChange={handleChange}
                         required
-                        className="p-3 border rounded"
+                        className="p-3 border rounded border-[#D85529] focus:ring-[#D85529]"
                     />
                     <input
                         name="location"
@@ -84,7 +84,7 @@ const AddEvents = () => {
                         onChange={handleChange}
                         placeholder="Location"
                         required
-                        className="p-3 border rounded"
+                        className="p-3 border rounded border-[#D85529] focus:ring-[#D85529]"
                     />
                     <textarea
                         name="description"
@@ -92,11 +92,11 @@ const AddEvents = () => {
                         onChange={handleChange}
                         placeholder="Event Description"
                         required
-                        className="p-3 border rounded h-24"
+                        className="p-3 border rounded h-24 border-[#D85529] focus:ring-[#D85529]"
                     />
                     <button
                         type="submit"
-                        className="bg-purple-600 text-white py-3 rounded hover:bg-purple-700"
+                        className="bg-[#D85529] text-white py-3 rounded hover:bg-[#D85529]"
                     >
                         Add Event
                     </button>
