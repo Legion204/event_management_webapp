@@ -134,7 +134,7 @@ const MyEvents = () => {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <form
                         onSubmit={handleUpdateSubmit}
-                        className="bg-white p-6 rounded shadow w-full max-w-md"
+                        className="bg-white p-6 rounded text-white shadow w-full max-w-md"
                     >
                         <h3 className="text-xl font-bold mb-4">Edit Event</h3>
                         <input
