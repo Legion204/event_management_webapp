@@ -17,15 +17,6 @@ A full-featured Event Management system built with the MERN stack where users ca
 
 ---
 
-## 📸 Screenshots
-
-> Add some screenshots here using:
-```md
-![Home Page](screenshots/home.png)
-```
-
----
-
 ## ⚙️ Tech Stack
 
 **Frontend:**
@@ -115,10 +106,7 @@ PATCH  /api/events/:id/join
 ## 🙋 Author
 
 - 👨‍💻 **Riyadul Islam**
-- 💌 [riyadul2003@gmail.com](mailto:riyadul2003@gmail.com)
+- 💌 [riyad.web.dev.pro@gmail.com](mailto:riyad.web.dev.pro@gmail.com)
 
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
