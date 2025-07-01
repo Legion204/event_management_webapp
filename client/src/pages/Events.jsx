@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CiCalendar } from "react-icons/ci";
 import { IoLocationOutline, IoPersonOutline, IoTimeOutline } from "react-icons/io5";
 import { GoPersonAdd } from "react-icons/go";
+import Swal from 'sweetalert2'
 
 const Events = () => {
     const { user, token } = useAuth();
@@ -11,11 +12,11 @@ const Events = () => {
     const [joinedEvents, setJoinedEvents] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // 🆕 Search and Filter state
+    //  Search and Filter state
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("all");
 
-    // 🧠 Fetch events from backend when token/search/filter changes
+    //  Fetch events from backend when token/search/filter changes
     useEffect(() => {
         const fetchEvents = async () => {
             try {
@@ -72,7 +73,12 @@ const Events = () => {
                 )
             );
         } catch (err) {
-            alert(err.response?.data?.error || "Failed to join");
+            Swal.fire({
+                title: err.response?.data?.error || "Failed to join the event.",
+                confirmButtonColor: "#D85529",
+                background: "#312D27",
+                color: "#fff",
+              });
         }
     };
 
@@ -80,7 +86,7 @@ const Events = () => {
         <div className="p-6 bg-[#191510] min-h-screen text-white">
             <h2 className="text-3xl font-bold mb-6 text-center text-[#D85529]">All Events</h2>
             <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
-                {/* 🔍 Search input */}
+                {/*  Search input */}
                 <input
                     type="text"
                     value={search}

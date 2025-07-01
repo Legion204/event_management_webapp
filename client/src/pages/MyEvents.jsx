@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { CiCalendar } from "react-icons/ci";
 import { IoLocationOutline, IoPersonOutline, IoTimeOutline } from "react-icons/io5";
 import { GoPersonAdd } from "react-icons/go";
+import Swal from 'sweetalert2'
 
 const MyEvents = () => {
     const { user, token } = useAuth();
@@ -35,11 +36,43 @@ const MyEvents = () => {
     }, [user.email, token]);
 
     const handleDelete = async (id) => {
-        const confirmed = confirm("Are you sure you want to delete?");
-        if (!confirmed) return;
+        const confirm = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+            background: "#312D27",
+            color: "#fff",
+        });
 
-        await axios.delete(`${import.meta.env.VITE_SERVER_URI}/api/events/${id}`);
-        setEvents(events.filter((e) => e._id !== id));
+        if (confirm.isConfirmed) {
+            try {
+                await axios.delete(`${import.meta.env.VITE_SERVER_URI}/api/events/${id}`);
+                setEvents((prev) => prev.filter((event) => event._id !== id));
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your event has been deleted.",
+                    icon: "success",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    background: "#312D27",
+                    color: "#fff",
+                });
+            } catch (err) {
+                console.error("Error deleting event", err);
+                Swal.fire({
+                    title: "Error!",
+                    text: "Failed to delete the event.",
+                    icon: "error",
+                    background: "#312D27",
+                    color: "#fff",
+                });
+            }
+        }
     };
 
     const handleEdit = (event) => {
